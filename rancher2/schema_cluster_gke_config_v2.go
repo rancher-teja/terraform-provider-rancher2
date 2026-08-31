@@ -2,6 +2,7 @@ package rancher2
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 )
 
 const (
@@ -12,6 +13,10 @@ const (
 	clusterGKEV2LoggingScheduler         = "scheduler"
 	clusterGKEV2LoggingcontrollerManager = "controllerManager"
 	clusterGKEV2LoggingAuthenticator     = "authenticator"
+)
+
+var (
+	clusterGKEReleaseChannels = []string{"Rapid", "Regular", "Stable", "Extended"}
 )
 
 //Types
@@ -562,6 +567,12 @@ func clusterGKEConfigV2Fields() map[string]*schema.Schema {
 			Optional:    true,
 			Computed:    true,
 			Description: "The GKE cluster region. Required if `zone` is empty",
+		},
+		"release_channel": {
+			Type:         schema.TypeString,
+			Optional:     true,
+			ValidateFunc: validation.StringInSlice(clusterGKEReleaseChannels, false),
+			Description:  "The GKE release channel to enroll the cluster in. One of Rapid, Regular, Stable or Extended. If empty, GKE attempts to resolve a channel automatically from `kubernetes_version`; some Kubernetes versions require explicit release channel enrollment, and cluster creation fails if no channel (selected or resolved) supports `kubernetes_version`",
 		},
 		"subnetwork": {
 			Type:        schema.TypeString,

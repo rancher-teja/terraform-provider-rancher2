@@ -315,6 +315,9 @@ func flattenClusterGKEConfigV2(in *managementClient.GKEClusterConfigSpec, p []in
 	if in.Subnetwork != nil && len(*in.Subnetwork) > 0 {
 		obj["subnetwork"] = *in.Subnetwork
 	}
+	// release_channel isn't read back here: managementClient.GKEClusterConfigSpec doesn't carry
+	// a ReleaseChannel field yet, so upstream state can't be reflected. Whatever value is already
+	// in obj (the prior Terraform state) is left untouched rather than being cleared.
 
 	return []interface{}{obj}
 }
@@ -662,7 +665,7 @@ func expandClusterGKEConfigV2(p []interface{}) *managementClient.GKEClusterConfi
 }
 
 // This fix is required due to some fields doesn't have proper type at Rancher go cli
-func fixClusterGKEConfigV2(values map[string]interface{}) map[string]interface{} {
+func fixClusterGKEConfigV2(p []interface{}, values map[string]interface{}) map[string]interface{} {
 	if values == nil {
 		return nil
 	}
@@ -682,6 +685,16 @@ func fixClusterGKEConfigV2(values map[string]interface{}) map[string]interface{}
 	for k, v := range affectedFields {
 		if values[k] == nil {
 			values[k] = v
+		}
+	}
+
+	// releaseChannel isn't a field on the vendored managementClient.GKEClusterConfigSpec yet, so
+	// expandClusterGKEConfigV2 can't set it on the struct. Set it directly on the outgoing map,
+	// from the raw schema data, so it still reaches the Rancher API on create/update.
+	if len(p) != 0 && p[0] != nil {
+		in := p[0].(map[string]interface{})
+		if v, ok := in["release_channel"].(string); ok && len(v) > 0 {
+			values["releaseChannel"] = v
 		}
 	}
 

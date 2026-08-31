@@ -251,6 +251,7 @@ func init() {
 			"private_cluster_config":            testClusterGKEConfigV2PrivateClusterConfigInterface,
 			"project_id":                        "project_id",
 			"region":                            "region",
+			"release_channel":                   "",
 			"subnetwork":                        "subnetwork",
 			"zone":                              "zone",
 		},
@@ -469,4 +470,33 @@ func TestExpandClusterGKEConfigV2(t *testing.T) {
 		output := expandClusterGKEConfigV2(tc.Input)
 		assert.Equal(t, tc.ExpectedOutput, output, "Unexpected output from expander.")
 	}
+}
+
+func TestFixClusterGKEConfigV2ReleaseChannel(t *testing.T) {
+	p := []interface{}{
+		map[string]interface{}{
+			"release_channel": "Stable",
+		},
+	}
+	values := map[string]interface{}{
+		"clusterName": "test-cluster",
+	}
+
+	output := fixClusterGKEConfigV2(p, values)
+
+	assert.Equal(t, "Stable", output["releaseChannel"], "release_channel should be set on the outgoing map")
+}
+
+func TestFixClusterGKEConfigV2ReleaseChannelOmitted(t *testing.T) {
+	p := []interface{}{
+		map[string]interface{}{},
+	}
+	values := map[string]interface{}{
+		"clusterName": "test-cluster",
+	}
+
+	output := fixClusterGKEConfigV2(p, values)
+
+	_, ok := output["releaseChannel"]
+	assert.False(t, ok, "releaseChannel shouldn't be set on the outgoing map when release_channel isn't configured")
 }

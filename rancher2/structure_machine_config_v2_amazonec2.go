@@ -25,7 +25,6 @@ type machineConfigV2Amazonec2 struct {
 	Endpoint                string   `json:"endpoint,omitempty" yaml:"endpoint,omitempty"`
 	HTTPEndpoint            string   `json:"httpEndpoint,omitempty" yaml:"httpEndpoint,omitempty"`
 	HTTPTokens              string   `json:"httpTokens,omitempty" yaml:"httpTokens,omitempty"`
-	HttpPutResponseHopLimit int      `json:"httpPutResponseHopLimit,omitempty" yaml:"httpPutResponseHopLimit,omitempty"`
 	IamInstanceProfile      string   `json:"iamInstanceProfile,omitempty" yaml:"iamInstanceProfile,omitempty"`
 	InsecureTransport       bool     `json:"insecureTransport,omitempty" yaml:"insecureTransport,omitempty"`
 	InstanceType            string   `json:"instanceType,omitempty" yaml:"instanceType,omitempty"`
@@ -110,10 +109,7 @@ func flattenMachineConfigV2Amazonec2(in *MachineConfigV2Amazonec2) []interface{}
 	if len(in.HTTPTokens) > 0 {
 		obj["http_tokens"] = in.HTTPTokens
 	}
-	if in.HttpPutResponseHopLimit > 0 {
-		obj["http_put_response_hop_limit"] = in.HttpPutResponseHopLimit
-	}
-	
+
 	if len(in.IamInstanceProfile) > 0 {
 		obj["iam_instance_profile"] = in.IamInstanceProfile
 	}
@@ -257,9 +253,6 @@ func expandMachineConfigV2Amazonec2(p []interface{}, source *MachineConfigV2) *M
 	}
 	if v, ok := in["http_tokens"].(string); ok && len(v) > 0 {
 		obj.HTTPTokens = v
-	}
-	if v, ok := in["http_put_response_hop_limit"].(int); ok && v > 0 {
-		obj.HttpPutResponseHopLimit = v
 	}
 
 	if v, ok := in["iam_instance_profile"].(string); ok && len(v) > 0 {
