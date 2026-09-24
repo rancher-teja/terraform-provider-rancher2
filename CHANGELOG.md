@@ -1,5 +1,24 @@
 # Changelog
 
+## [14.2.2](https://github.com/rancher-teja/terraform-provider-rancher2/compare/v14.2.2...v14.2.2) (2026-09-24)
+
+
+### Features
+
+* add release channel support ([#2493](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2493)) ([71fbd0c](https://github.com/rancher-teja/terraform-provider-rancher2/commit/71fbd0c225b874f1be4297bd64d3ef35174182be))
+* add s3 retention config for etcd snapshots ([#2403](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2403)) ([578b9a0](https://github.com/rancher-teja/terraform-provider-rancher2/commit/578b9a03da6de9956ea5f17343e00f929009fcfa))
+* add use internal certs option for local auth endpoint in cluster v2 ([#1626](https://github.com/rancher-teja/terraform-provider-rancher2/issues/1626)) ([#2293](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2293)) ([28e9051](https://github.com/rancher-teja/terraform-provider-rancher2/commit/28e90514e2dc1b91db17689c1d2a802a20dc2327))
+
+
+### Bug Fixes
+
+* add the proper last release sha ([#2484](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2484)) ([955ca89](https://github.com/rancher-teja/terraform-provider-rancher2/commit/955ca89c75eeb0f4cc2eac4edcc0915d16d575cd))
+* release as v14.2.1 ([#2485](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2485)) ([efb4106](https://github.com/rancher-teja/terraform-provider-rancher2/commit/efb4106d38c868bf4ad46d4a50731fd57b61cbf7))
+* release v14.2.0 ([#2483](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2483)) ([5898c6b](https://github.com/rancher-teja/terraform-provider-rancher2/commit/5898c6b3765769a78898e1051b1ce3a46ae76a88))
+* remove deprecated catalog v1 resources ([#2316](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2316)) ([#2328](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2328)) ([#2490](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2490)) ([8c4df45](https://github.com/rancher-teja/terraform-provider-rancher2/commit/8c4df45f05632cdf97a14111f1784a574af6d4ce))
+* Revert "feat: support using internal certs for the local auth endpoint" ([#1626](https://github.com/rancher-teja/terraform-provider-rancher2/issues/1626)) ([#2440](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2440)) ([#2446](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2446)) ([ccd5864](https://github.com/rancher-teja/terraform-provider-rancher2/commit/ccd58640d97aff3746097d0cff052e40b7d7a36d))
+* update docs on app_v2 import ([#2317](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2317)) ([#2330](https://github.com/rancher-teja/terraform-provider-rancher2/issues/2330)) ([3eca3dd](https://github.com/rancher-teja/terraform-provider-rancher2/commit/3eca3dd701fcfc18c8b1746ee77c245f06c9abfe))
+
 ## [14.2.2](https://github.com/rancher/terraform-provider-rancher2/compare/v14.2.2...v14.2.2) (2026-09-10)
 
 
